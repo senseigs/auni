@@ -16,7 +16,9 @@
                         secondary: '#1e293b',
                         accent: '#ef4444',
                         dark: '#020617',
-                        light: '#f1f5f9'
+                        light: '#f1f5f9',
+                        lightPrimary: '#e2e8f0',
+                        lightSecondary: '#f8fafc'
                     },
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
@@ -47,18 +49,53 @@
         }
     </script>
     <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #ef4444;
+            --dark: #020617;
+            --light: #f1f5f9;
+            --light-primary: #e2e8f0;
+            --light-secondary: #f8fafc;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+        }
+
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
-            color: #e2e8f0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: var(--light-primary);
             font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        body.theme-blue {
+            --accent: var(--accent-blue);
+            --primary: #0c4a6e;
+            --secondary: #075985;
+            --dark: #082f49;
+        }
+
+        body.theme-green {
+            --accent: var(--accent-green);
+            --primary: #064e3b;
+            --secondary: #047857;
+            --dark: #065f46;
         }
 
         .hero-bg {
             background: radial-gradient(circle at center, rgba(239, 68, 68, 0.15) 0%, transparent 70%);
             position: relative;
             overflow: hidden;
+        }
+
+        .theme-blue .hero-bg {
+            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+        }
+
+        .theme-green .hero-bg {
+            background: radial-gradient(circle at center, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
         }
 
         .hero-bg::before {
@@ -72,6 +109,18 @@
                 radial-gradient(circle at 10% 20%, rgba(239, 68, 68, 0.1) 0%, transparent 20%),
                 radial-gradient(circle at 90% 80%, rgba(239, 68, 68, 0.1) 0%, transparent 20%);
             z-index: -1;
+        }
+
+        .theme-blue .hero-bg::before {
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 20%);
+        }
+
+        .theme-green .hero-bg::before {
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 20%);
         }
 
         .logo-container {
@@ -90,9 +139,25 @@
             transition: all 0.4s ease;
         }
 
+        .theme-blue #logo-empresa {
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+        }
+
+        .theme-green #logo-empresa {
+            filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));
+        }
+
         #logo-empresa:hover {
             transform: scale(1.05);
             filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.8));
+        }
+
+        .theme-blue #logo-empresa:hover {
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.8));
+        }
+
+        .theme-green #logo-empresa:hover {
+            filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.8));
         }
 
         .nav-links {
@@ -122,10 +187,26 @@
             transform: translateY(-3px);
         }
 
+        .theme-blue .nav-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .theme-green .nav-link:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
         .nav-link.active {
             color: #f8fafc;
-            background: linear-gradient(45deg, #ef4444, #b91c1c);
+            background: linear-gradient(45deg, var(--accent), var(--accent));
             box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .theme-blue .nav-link.active {
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .theme-green .nav-link.active {
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
         }
 
         .section-title {
@@ -146,7 +227,7 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background: linear-gradient(90deg, transparent, #ef4444, transparent);
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
             border-radius: 2px;
         }
 
@@ -162,10 +243,26 @@
             transform: translateY(0);
         }
 
+        .theme-blue .product-card {
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .theme-green .product-card {
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
         .product-card:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
             border-color: rgba(239, 68, 68, 0.5);
+        }
+
+        .theme-blue .product-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .theme-green .product-card:hover {
+            border-color: rgba(16, 185, 129, 0.5);
         }
 
         .product-image {
@@ -183,7 +280,7 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            background: linear-gradient(45deg, #ef4444, #b91c1c);
+            background: linear-gradient(45deg, var(--accent), var(--accent));
             color: white;
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
@@ -195,7 +292,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, #ef4444, #b91c1c);
+            background: linear-gradient(45deg, var(--accent), var(--accent));
             color: white;
             font-weight: 600;
             padding: 0.8rem 2rem;
@@ -210,9 +307,25 @@
             cursor: pointer;
         }
 
+        .theme-blue .btn-primary {
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .theme-green .btn-primary {
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 7px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        .theme-blue .btn-primary:hover {
+            box-shadow: 0 7px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .theme-green .btn-primary:hover {
+            box-shadow: 0 7px 20px rgba(16, 185, 129, 0.4);
         }
 
         .btn-primary:active {
@@ -240,10 +353,27 @@
             border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
+        .theme-blue .social-icons a {
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .theme-green .social-icons a {
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
         .social-icons a:hover {
-            background: linear-gradient(45deg, #ef4444, #b91c1c);
+            background: linear-gradient(45deg, var(--accent), var(--accent));
             transform: translateY(-5px) scale(1.1);
             box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+            color: white;
+        }
+
+        .theme-blue .social-icons a:hover {
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .theme-green .social-icons a:hover {
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
         }
 
         .hidden-section {
@@ -260,15 +390,31 @@
             border: 1px solid rgba(239, 68, 68, 0.2);
         }
 
+        .theme-blue .info-card {
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .theme-green .info-card {
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
         .info-card:hover {
             transform: translateY(-5px);
             border-color: rgba(239, 68, 68, 0.5);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
+        .theme-blue .info-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .theme-green .info-card:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+
         .info-card i {
             font-size: 2.5rem;
-            color: #ef4444;
+            color: var(--accent);
             margin-bottom: 1rem;
         }
 
@@ -279,6 +425,14 @@
             padding: 2.5rem 0;
             margin-top: 3rem;
             border-top: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .theme-blue .footer {
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .theme-green .footer {
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
         }
 
         .hero-text {
@@ -294,10 +448,18 @@
             margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            background: linear-gradient(90deg, #f8fafc, #ef4444);
+            background: linear-gradient(90deg, #f8fafc, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 2px 10px rgba(239, 68, 68, 0.2);
+        }
+
+        .theme-blue .hero-text h1 {
+            text-shadow: 0 2px 10px rgba(59, 130, 246, 0.2);
+        }
+
+        .theme-green .hero-text h1 {
+            text-shadow: 0 2px 10px rgba(16, 185, 129, 0.2);
         }
 
         .hero-text p {
@@ -321,6 +483,46 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
+        }
+
+        .theme-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .theme-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-option:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-red {
+            background: linear-gradient(45deg, #ef4444, #b91c1c);
+        }
+
+        .theme-blue-option {
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+        }
+
+        .theme-green-option {
+            background: linear-gradient(45deg, #10b981, #047857);
+        }
+
+        .theme-option.active {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 3px white, 0 0 0 5px var(--accent);
         }
 
         @media (max-width: 768px) {
@@ -349,6 +551,11 @@
             
             .section-title {
                 font-size: 2rem;
+            }
+            
+            .theme-selector {
+                top: 10px;
+                right: 10px;
             }
         }
 
@@ -383,10 +590,26 @@
             .section-title {
                 font-size: 1.8rem;
             }
+            
+            .theme-selector {
+                flex-direction: column;
+            }
+            
+            .theme-option {
+                width: 25px;
+                height: 25px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Selector de temas -->
+    <div class="theme-selector">
+        <div class="theme-option theme-red active" data-theme="red"></div>
+        <div class="theme-option theme-blue-option" data-theme="blue"></div>
+        <div class="theme-option theme-green-option" data-theme="green"></div>
+    </div>
+
     <div class="max-w-6xl mx-auto px-4">
         <!-- Logo centrado en la parte superior -->
         <div class="logo-container">
@@ -443,7 +666,7 @@
                         </div>
                     </div>
                     
-<div class="product-card animate-fade-in">
+                    <div class="product-card animate-fade-in">
                         <span class="product-tag">Nuevo</span>
                         <img src="https://huggingface.co/datasets/darkred06/aunifotos/resolve/main/negromujer.jpg?download=true" alt="Chaqueta de cuero" class="product-image"/>
                         <div class="p-5">
@@ -455,7 +678,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="product-card animate-fade-in">
                         <span class="product-tag">Popular</span>
@@ -470,7 +692,20 @@
                         </div>
                     </div>
 
- <div class="product-card animate-fade-in">
+                    <div class="product-card animate-fade-in">
+                        <span class="product-tag">Destacado</span>
+                        <img src="https://huggingface.co/datasets/darkred06/FOTOSMASAUNI/resolve/main/conjunto%20negro%20%20mujer.JPG?download=true" alt="Chaqueta de cuero" class="product-image"/>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-2">BLACK WOLF WOMAN</h3>
+                            <p class="mb-4 text-gray-300">Conjunto deportivo para mujer color negro ,nueva edicion,sobrepedido</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-red-400">$599</span>
+                                <a href="https://wa.me/p/24637754645840637/5218131045278" target="_blank" class="btn-primary text-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card animate-fade-in">
                         <span class="product-tag">Nuevo</span>
                         <img src="https://huggingface.co/datasets/darkred06/aunifotos/resolve/main/blacky2.jpg?download=true" alt="Chaqueta de cuero" class="product-image"/>
                         <div class="p-5">
@@ -481,10 +716,9 @@
                                 <a href="https://wa.me/p/24559702430355001/5218131045278" target="_blank" class="btn-primary text-sm">Comprar</a>
                             </div>
                         </div>
-                    </div>
+                    </div> 
 
-
-                     <div class="product-card animate-fade-in">
+                    <div class="product-card animate-fade-in">
                         <span class="product-tag">Nuevo</span>
                         <img src="https://huggingface.co/datasets/darkred06/aunifotos/resolve/main/cyan2.jpg?download=true" alt="Chaqueta de cuero" class="product-image"/>
                         <div class="p-5">
@@ -498,7 +732,135 @@
                     </div>
 
 
+ 
+                    <div class="product-card animate-fade-in">
+                        <span class="product-tag">Nuevo</span>
+                        <img src="https://huggingface.co/datasets/darkred06/FOTOSMASAUNI/resolve/main/falda%20blanca%20sin%20mangas.JPG?download=true" alt="Chaqueta de cuero" class="product-image"/>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-2">WHITE WOLF SKIRT</h3>
+                            <p class="mb-4 text-gray-300">Falda deportiva color blanco para mujer</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-red-400">$449</span>
+                                <a href="https://wa.me/p/24527841546869422/5218131045278" target="_blank" class="btn-primary text-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                    <div class="product-card animate-fade-in">
+                        <span class="product-tag">Nuevo</span>
+                        <img src="https://huggingface.co/datasets/darkred06/FOTOSMASAUNI/resolve/main/falda%20negra%20mujer.JPG?download=true" alt="Chaqueta de cuero" class="product-image"/>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-2">BLACK WOLF SKIRT</h3>
+                            <p class="mb-4 text-gray-300">Falda deportiva color negro para mujer</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-red-400">$449</span>
+                                <a href="https://wa.me/p/31321384107507233/5218131045278" target="_blank" class="btn-primary text-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                     <div class="product-card animate-fade-in">
+                        <span class="product-tag">Nuevo</span>
+                        <img src="https://huggingface.co/datasets/darkred06/FOTOSMASAUNI/resolve/main/camisa%20negra%20sin%20mangas.JPG?download=true" alt="Chaqueta de cuero" class="product-image"/>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-2">SLEEVES BLACK T-SHIRT WOLF</h3>
+                            <p class="mb-4 text-gray-300">Playera de compresion color negro</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-red-400">$299</span>
+                                <a href="https://wa.me/p/24370980285844784/5218131045278" target="_blank" class="btn-primary text-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="product-card animate-fade-in">
+                        <span class="product-tag">Nuevo</span>
+                        <img src="https://huggingface.co/datasets/darkred06/FOTOSMASAUNI/resolve/main/camisa%20blanca%20sin%20mangas.JPG" alt="Chaqueta de cuero" class="product-image"/>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-2">SLEEVES WHITE T-SHIRT WOLF</h3>
+                            <p class="mb-4 text-gray-300">Playera de compresion color blanco</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-red-400">$299</span>
+                                <a href="https://wa.me/p/24370980285844784/5218131045278" target="_blank" class="btn-primary text-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                     
+
+                    <div class="product-card animate-fade-in">
+                        <span class="product-tag">Nuevo</span>
+                        <img src="https://huggingface.co/datasets/darkred06/FOTOSMASAUNI/resolve/main/tank%20blanca.jpeg?download=true" alt="Chaqueta de cuero" class="product-image"/>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-2">TANK TOP WOLF WHITE</h3>
+                            <p class="mb-4 text-gray-300">Playera de tirantes (compresion) color blanca</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-red-400">$249</span>
+                                <a href="https://wa.me/p/24122167607466082/5218131045278" target="_blank" class="btn-primary text-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+ 
+                     <div class="product-card animate-fade-in">
+                        <span class="product-tag">Nuevo</span>
+                        <img src="https://huggingface.co/datasets/darkred06/FOTOSMASAUNI/resolve/main/camisa%20corta%20negra.JPG.jpeg?download=true" alt="Chaqueta de cuero" class="product-image"/>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-2">TANK TOP WOLF BLACK</h3>
+                            <p class="mb-4 text-gray-300">Playera de tirantes (compresion) color negro</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-red-400">$249</span>
+                                <a href="https://wa.me/p/24122167607466082/5218131045278" target="_blank" class="btn-primary text-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+ <div class="product-card animate-fade-in">
+                        <span class="product-tag">Nuevo</span>
+                        <img src="https://huggingface.co/datasets/darkred06/FOTOSMASAUNI/resolve/main/gorra%20blanca.JPG?download=true" alt="Chaqueta de cuero" class="product-image"/>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-2">CAP WOLF WHITE</h3>
+                            <p class="mb-4 text-gray-300">Gorra blanca unisex</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-red-400">$249</span>
+                                <a href="https://wa.me/p/24698228576508738/5218131045278" target="_blank" class="btn-primary text-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="product-card animate-fade-in">
+                        <span class="product-tag">Nuevo</span>
+                        <img src="https://huggingface.co/datasets/darkred06/FOTOSMASAUNI/resolve/main/gorra%20negra.JPG.jpg?download=true" alt="Chaqueta de cuero" class="product-image"/>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-2">CAP WOLF BLACK</h3>
+                            <p class="mb-4 text-gray-300">Gorra negro unisex</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-red-400">$249</span>
+                                <a href="https://wa.me/p/24698228576508738/5218131045278" target="_blank" class="btn-primary text-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
                     <div class="product-card animate-fade-in">
                         <span class="product-tag">Destacado</span>
                         <img src="https://huggingface.co/datasets/darkred06/aunifotos/resolve/main/rosamujer.png?download=true" alt="Conjunto deportivo rosa" class="product-image"/>
@@ -559,8 +921,6 @@ En WOLF SEASON, no solo creamos ropa, forjamos una identidad. Únete a nuestra m
                     <div class="social-icons">
                         <a href="https://www.facebook.com/share/1VReLao2CB/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/wolfseason_ws/?utm_source=ig_web_button_share_sheet"><i class="fab fa-instagram"></i></a>
-                        <!-- <a href="#"><i class="fab fa-twitter"></i></a>-->
-                        <!--<a href="#"><i class="fab fa-tiktok"></i></a>-->
                     </div>
                 </div>
             </section>
@@ -576,6 +936,7 @@ En WOLF SEASON, no solo creamos ropa, forjamos una identidad. Únete a nuestra m
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-link');
             const allSections = document.querySelectorAll('main section');
+            const themeOptions = document.querySelectorAll('.theme-option');
             
             // Mostrar sección por defecto
             showSection('seccion-inicio');
@@ -602,6 +963,32 @@ En WOLF SEASON, no solo creamos ropa, forjamos una identidad. Únete a nuestra m
                 }
             }
             
+            // Función para cambiar el tema
+            function changeTheme(theme) {
+                const body = document.body;
+                
+                // Remover clases de tema existentes
+                body.classList.remove('theme-red', 'theme-blue', 'theme-green');
+                
+                // Agregar la clase del nuevo tema
+                if (theme !== 'red') {
+                    body.classList.add(`theme-${theme}`);
+                }
+                
+                // Actualizar indicador de tema activo
+                themeOptions.forEach(option => {
+                    option.classList.remove('active');
+                });
+                
+                const activeOption = document.querySelector(`.theme-option[data-theme="${theme}"]`);
+                if (activeOption) {
+                    activeOption.classList.add('active');
+                }
+                
+                // Guardar preferencia en localStorage
+                localStorage.setItem('theme', theme);
+            }
+            
             // Event listeners para navegación
             navLinks.forEach(link => {
                 link.addEventListener('click', (event) => {
@@ -616,11 +1003,19 @@ En WOLF SEASON, no solo creamos ropa, forjamos una identidad. Únete a nuestra m
                 event.preventDefault();
                 showSection('seccion-productos');
             });
+            
+            // Event listeners para opciones de tema
+            themeOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const theme = option.getAttribute('data-theme');
+                    changeTheme(theme);
+                });
+            });
+            
+            // Cargar tema guardado
+            const savedTheme = localStorage.getItem('theme') || 'red';
+            changeTheme(savedTheme);
         });
     </script>
 </body>
 </html>
-
-
-
-
